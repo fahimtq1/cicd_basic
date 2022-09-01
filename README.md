@@ -1,7 +1,5 @@
 # CI/CD Pipelines
 
-![CICD](https://user-images.githubusercontent.com/99980305/187885336-6fb1e9e2-840f-46c9-a8aa-34075012512a.png)
-
 ## What is CI/CD?
 
 It is the combined software practice of continuous integration (CI), continuous delivery (CD) and continuous deployment (CDE). This methodology helps to frequently deliver applications to end-users via the introduction of automation in the stages of the software development lifecycle (SDLC).
@@ -32,3 +30,9 @@ It is the combined software practice of continuous integration (CI), continuous 
 - Automated messages sent from apps when something happens
 - In Jenkins, webhooks are a mechanism to automatically trigger the build of a Jenkins project in response to a commit pushed to a Git repository
 - Add a webhook by accessing webhooks with repository settings page and then add webhook
+
+## Using Jenkins for CICD
+
+![CICD](https://user-images.githubusercontent.com/99980305/187885336-6fb1e9e2-840f-46c9-a8aa-34075012512a.png)
+
+
