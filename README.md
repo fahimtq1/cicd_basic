@@ -31,4 +31,4 @@ It is the combined software practice of continuous integration (CI), continuous 
 
 - Automated messages sent from apps when something happens
 - In Jenkins, webhooks are a mechanism to automatically trigger the build of a Jenkins project in response to a commit pushed to a Git repository
-- Add a webhook by accessing webhooks with repository settings page 
+- Add a webhook by accessing webhooks with repository settings page and then add webhook
