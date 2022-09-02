@@ -96,6 +96,17 @@ Repeat the steps in Job 1 and change the following sections:
 
 1. Git Publisher -> Push Only if Build Succeeds -> Merge Results
 
+### Job 3
 
+#### Steps:
 
-
+- Create EC2
+- Create Security Group
+- Allow Jenkins IP to SSH in as well as any other rules required
+- Create Job 3- get the code from the main branch and copy (SCP) to the EC2 instance 
+- Run the script to install node with any other required dependencies
+- Job 3 must only be triggered if previous jobs are successful 
+- First iteration- run npm install and npm start manually (delivery)
+- Job 4 launch the app- only triggered if job 3 is successful
+- pm2 kill all -> Job 5 to create DB_HOST environment variable in the app EC2 instance
+- npm start
