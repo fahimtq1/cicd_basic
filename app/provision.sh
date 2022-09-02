@@ -1,6 +1,5 @@
 sudo apt-get update -y   # best to update and upgrade vm at the start
 sudo apt-get upgrade -y
-echo "DB_HOST=mongodb://192.168.10.150:27017/posts" | sudo tee -a /etc/environment
 sudo apt-get update -y   # best to update and upgrade vm at the start
 sudo apt-get upgrade -y
 sudo apt-get install nginx -y   # starts after installation
