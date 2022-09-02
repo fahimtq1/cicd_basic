@@ -1,7 +1,5 @@
 sudo apt-get update -y   # best to update and upgrade vm at the start
 sudo apt-get upgrade -y
-sudo apt-get update -y   # best to update and upgrade vm at the start
-sudo apt-get upgrade -y
 sudo apt-get install nginx -y   # starts after installation
 sudo systemctl restart nginx
 sudo systemctl enable nginx
