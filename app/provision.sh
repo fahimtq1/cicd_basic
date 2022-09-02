@@ -15,6 +15,5 @@ sudo npm install pm2 -g
 sudo cp -f jenkins_app/app/default /etc/nginx/sites-available/default
 sudo systemctl restart nginx
 sudo systemctl enable nginx
-cd app/app && npm install
 sudo apt-get update -y   # best to update and upgrade vm at the start
 sudo apt-get upgrade -y
