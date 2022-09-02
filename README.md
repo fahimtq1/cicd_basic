@@ -33,7 +33,7 @@ It is the combined software practice of continuous integration (CI), continuous 
 
 ## Using Jenkins for CICD
 
-![CICD](https://user-images.githubusercontent.com/99980305/187885336-6fb1e9e2-840f-46c9-a8aa-34075012512a.png)
+![CICD](https://user-images.githubusercontent.com/99980305/188125133-faa9a508-0c47-454f-a242-801ff3a7f027.png)
 
 ### Configuring Git and GitHub for Jenkins
 
@@ -98,15 +98,44 @@ Repeat the steps in Job 1 and change the following sections:
 
 ### Job 3
 
-#### Steps:
+This job will only be triggered if the previous jobs are successful
 
-- Create EC2
-- Create Security Group
-- Allow Jenkins IP to SSH in as well as any other rules required
-- Create Job 3- get the code from the main branch and copy (SCP) to the EC2 instance 
-- Run the script to install node with any other required dependencies
-- Job 3 must only be triggered if previous jobs are successful 
-- First iteration- run npm install and npm start manually (delivery)
-- Job 4 launch the app- only triggered if job 3 is successful
-- pm2 kill all -> Job 5 to create DB_HOST environment variable in the app EC2 instance
-- npm start
+- Create EC2 instance with:
+
+1. Security Group that allows port 22, 3000 and 80
+2. Port 22 source is the Jenkins server IP 
+3. Select the relevant key pair
+
+- In Jenkins repeat the steps for Job 1 with following amendments:
+
+1. Source Code Management- None
+2. Build Environment- Provide Node and npm bin/ folder to PATH and SSH Agent (add pem file)
+3. Build- Execute Shell with following script 
+
+```
+rm -rf eng84_cicd_jenkins*
+git clone -b main https://github.com/Olejekglejek/CI_CD_Jenkins.git
+
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@deploy_public_ip:/home/ubuntu/app
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@deploy_public_ip:/home/ubuntu/app
+
+ssh -A -o "StrictHostKeyChecking=no" ubuntu@deploy_public_ip <<EOF
+
+    # 'kill' all running instances of node.js
+    killall npm
+
+    # run provisions file for dependencies
+    cd /home/ubuntu/app/environment/app
+    chmod +x provision.sh
+    ./provision.sh
+
+    # Install npm for remaining dependencies
+    cd /home/ubuntu/app/app
+    sudo npm install
+    node seeds/seed.js
+
+    # Run the app
+    node app.js &
+
+EOF
+'''
